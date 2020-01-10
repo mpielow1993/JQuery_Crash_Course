@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JQuery Crash Course | Selectors</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <style>
+            body {
+                font-size : 17px;
+                font-family : arial;
+                background : #f4f4f4;
+                line-height : 1.5em;
+            }
+            header {
+                background : #333;
+                color : #fff;
+                padding : 20px;
+                text-align : center;
+                border-bottom : 4px #000 solid;
+                margin-bottom: 10px;
+            }
+            #container {
+                width: 90%;
+                margin : auto;
+                padding : 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>JQuery Crash Course | Selectors</h1>
+        </header>
+        <div id="container">
+            <!-- Since we are talking about selectors in this tutorial, we first need some DOM elements to work with -->
+            <h1 id="heading1">Heading 1</h1>
+            
+            <p id="para1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <span>Excepteur sint occaecat</span> cupidatat non proident, sunt in 
+            culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+            <h1 class="heading2">Heading 2</h1>
+            
+            <p class="para2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <span>Excepteur sint occaecat</span> cupidatat non proident, sunt in 
+            culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+            <span>tempor incididunt</span>
+            
+            <ul id="list">
+                <li>List Item</li>
+                <li>List Item</li>
+                <li>List Item</li>
+                <li>List Item</li>
+                <li>List Item</li>
+                <li>List Item</li>
+                <li>List Item</li>
+            </ul>
+            
+            <input type="button" value="Button">      <!-- Input does NOT require an end tag -->
+            <input type="submit" value="Submit"> 
+            <input type="text"> 
+            
+            <a href="https://www.google.com">Google</a>
+            <a href="https://www.yahoo.com">Yahoo</a>
+        </div>
+        <script>
+
+            //I first want to use a selector to grab the headings -->
+            //With jQuery, we use the '$(element)', notation. Think if it as 'select(HTML element)'  -->
+            
+            //hide() function
+            //$('h1').hide();
+            //$('#heading1').hide();
+            //$('.heading2').hide();
+            
+            //Selecting elements nested within other elements
+            
+            //Example - if we want to reference the <span> element within the <h1> above, we do the following:
+            
+            //We will experiment with the 'css()' method
+            //This method will take a property as the first argument (key) and the new vaue to set it to as the second argument
+            //$('p span').css('color', 'red');
+            $('span').css('color', 'red');
+            
+            //If you were to take this span and put it outside of the paragraph, the above method would not work due to the syntax of the argument
+            //If you were to just input 'span', then it would work fine
+            
+            //We can get even more specific and use the CSS3 selectors (see from line 50)
+            
+            //Let's say that we wish to grab the first list item
+            
+            $('ul#list li:first').css('color', 'red');
+            $('ul#list li:last').css('color', 'green');
+            
+            //Can even do add and even elements
+            
+            $('ul#list li:even').css('background-color', 'blue');
+            $('ul#list li:odd').css('background-color', 'yellow');         //Notice how this overrides the previous two commands
+            
+            //If we want to change sequential values (i.e every nth value), we can do the using an 'nth child selector'
+            
+            $('ul#list li:nth-child(3n)').css('list-style', 'none');    //removes the bullet point
+            
+            //Now we will move onto inputs (go to start of line 59)
+            
+            //We can use the type attribute of <input> as a selector by prefixing the type with ':'
+            
+            //Say if we wanted to grab all of the button types
+            //$(':button').hide();
+            //$(':submit').hide();
+            $(':text').hide();
+            
+            //We can also work with attributes as selectors
+            //We will start by creating some links (go to line 64)
+            
+            //Let's say that we want to change all elements with a 'href' attribute
+            //We so this with bracket notation '[]', like so
+            
+            $('[href]').css('color', 'red');
+            
+            //We can take things a step further and target the actual value of an attribute
+            //Let's say that we want the element with the href value of 'https://www.yahoo.com'
+            
+            $('a[href="https://www.yahoo.com"]').css('color', 'green');
+            
+            //We also have the asterisk, which will grab everything
+            
+            //$('*').hide();            //remember that this is a wildcard for 'anything'
+            
+        </script>
+    </body>
+</html>

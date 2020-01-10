@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JQuery Crash Course | Events</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <style>
+            body {
+                font-size : 17px;
+                font-family : arial;
+                background : #f4f4f4;
+                line-height : 1.5em;
+            }
+            header {
+                background : #333;
+                color : #fff;
+                padding : 20px;
+                text-align : center;
+                border-bottom : 4px #000 solid;
+                margin-bottom: 10px;
+            }
+            #container {
+                width: 90%;
+                margin : auto;
+                padding : 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>JQuery Crash Course | Events</h1>
+        </header>
+        <div id="container">
+            <h1>Mouse Events</h1>
+            <button id="btn-1" class="btn-class">Button 1</button>
+            <button id="btn-2">Button 2</button>
+            
+            <p class="para1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            
+            <h1 id="coords"></h1>
+            
+            <hr>
+            
+            <form id="form">
+                <label>Name</label><br>
+                <input type="text" id="name" name="name"><br>
+                
+                <label>Email</label><br>
+                <input type="text" id="email" name="email"><br>
+                
+                <label>Gender</label><br>
+                <select id="gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br>
+                
+                <input type="submit" value="Submit"><br>
+            </form>
+            
+        </div>
+        <script>
+        
+        //I want to add a 'click()' event to btn-1
+        //Inside the 'click()' function, we need to provide a self-calling function (Handler) as an argument
+    
+    /*
+        
+        $('#btn-1').click(function() {
+            //the code below describes what we want to happen when the button is clicked
+            alert('Button Clicked');
+        })
+        
+        
+        //Before moving on, there is one thing to address
+        
+        //Sometimes people like to put their JS in the <head>
+        //If you were to do this for the code from lines 42 - 45, if you were to reload and click the button, nothing would happen
+        //The reason for this is it is trying to grab btn-1 before it is loaded onto the page
+        
+        //What we can do to prevent this from happening is using '$(document).ready()'
+        
+        //This basically means that when the whole document is ready, THEN run this function
+        
+        //Behind the scenes, the 'click()' function actually runs what is called the 'on()' method
+        
+        //'on()' Example
+        
+         //This takes 2 parameters
+         //The first is the event that we want ('click()')
+         //The second is the associated function
+        
+        
+        $('#btn-1').on('click', function() {
+            alert('Button Clicked');
+        });
+
+        
+        //Often, you want an event that, when fired, does something somewhere else on the page
+        
+        //Example
+        
+        //go to line 37
+        
+        //When btn-1 is clicked, we want to hide para1
+        
+        $('#btn-1').on('click', function() {
+            $('.para1').hide();
+        })
+        
+        $('#btn-2').on('click', function() {
+            $('.para1').show();
+        })
+        
+        
+        //In some cases, you may want the same button to toggle back and forth (i.e assingn two events to one element)
+        //For this, we can use the 'toggle()' method
+
+        
+        $('#btn-1').on('click', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        //Now let's talk about some other events
+        
+        //dblclick()
+        
+        
+        $('#btn-1').dblclick(function() {
+            $('.para1').toggle();            
+        })
+        
+        
+        //hover()
+    
+        
+        $('#btn-1').hover(function() {
+            $('.para1').toggle();            
+        })
+        
+        //What is interesting about 'hover()' is that it is NOT an actual event
+        //I.e, if you were to input:
+        
+        
+        $('#btn-1').on('hover', function() {
+            $('.para1').toggle();
+        }) 
+    
+        
+        //nothing would happen
+        //This is because it is NOT a real event. It is just a shorthand syntax for 2 other events, namely 'mouseenter' and 'mouseleave'
+        
+        
+        $('#btn-1').on('mouseenter', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        $('#btn-1').on('mouseleave', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        //mousemove
+        
+        
+        $('#btn-1').on('mousemove', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        //mouseup
+        
+        
+        $('#btn-1').on('mousedown', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        $('#btn-1').on('mouseup', function() {
+            $('.para1').toggle();
+        })
+        
+        
+        //Next, we will show how to pass an optional parameter for the event
+        
+        //Let's see this with a 'click()' event
+        //We will pass a paramter 'e' to the function
+        
+        
+        $('#btn-1').click(function(e) {
+            //the code below describes what we want to happen when the button is clicked
+            
+            
+            //console.log(e);
+            //console.log(e.currentTarget.id);
+            //console.log(e.currentTarget.innerHTML);
+            
+            
+            //We can also get the outer HTML
+            
+            //console.log(e.currentTarget.outerHTML);
+            
+            //This outputs an event object with its own particular dataset (most of it is useless for us)
+            //We can access these using the notation learned in the JS tutorial
+            
+            //let's say that we wanted to add a class
+            
+            //console.log(e.currentTarget.className);
+            
+            //A lot can be achieved by accessing these values
+        });
+        
+                                
+        $('#btn-1').on('mousemove', function(e) {
+            console.log('Coords : Y : ' + e.clientY + ' X : ' + e.clientX);
+        })
+        
+        
+        //We can extend this to the whole document by passeing 'documnent' as an argument
+        //If we want to bring it into the browser, we can do that as well (line 43)
+        
+        
+        $('#btn-1').on('mousemove', function(e) {
+            $('#coords').html('Coords : Y : ' + e.clientY + ' X : ' + e.clientX);
+        })
+        
+        $('#btn-1').on('mouseenter', function(e) {
+            $('#coords').show();
+        })
+        
+        $('#btn-1').on('mouseleave', function(e) {
+            $('#coords').hide();
+        })
+        
+        
+        //append() adds, html() replaces
+        
+        
+        $('#btn-2').on('click', function(e) {
+            console.log(e);
+        })
+        
+        
+        //FORM EVENTS
+        
+        //Go to line 45
+        
+        //focus() EVENT
+        
+        //'focus()' is when you click into an input
+        
+        
+        //Here is a perfect use case for this
+        //'this' refers to the current element we are in, in this case, ''input#' + form_ids[i]'
+        
+        $('input').focus(function() {
+            //change the colour when an input field is focused on
+            $(this).css('background-color', 'yellow');
+        })
+        
+        //Notice how it doesn't go back when you change focus? This can be corrected with 'blur()', the opposite of focus()
+    
+        $('input').blur(function() {
+            //change the colour when an input field is unfocused/ blurred
+            $(this).css('background-color', 'white');
+        })
+        
+        //We also have a 'keyup' and 'keydown' event
+        
+        
+        $('input').keyup(function() {
+            console.log('key up');
+        })
+        
+        
+        //Let's say we want to get the value of the input
+        
+        
+        $('input').keyup(function(e) {
+            console.log(e.target.value);
+        })
+        
+        //The next event to look at is 'change()', which we can pertain to the input type 'select'
+    
+    $('select#gender').change(function() {
+        alert('Changed');
+    });
+    
+    
+    $('select#gender').change(function(e) {
+        console.log(e.target.value);
+    });
+    
+    */
+    
+    //So far, we have been dealing with separate inputs
+    //Now, we will deal with the form itself
+    
+    $('#form').submit(function(e) {
+        e.preventDefault();
+        
+        //When this is run as it is, we don't see 'console.log'. This is because the form is actually submitting
+        //To stop this, we need to pass an argument and add 'preventDefault()'
+        
+        //say if we wanted to grab the value of this field, we can use the 'val()' function:
+        var name = $('input#name').val();
+        
+        console.log(name);
+    })
+        
+        </script>
+    </body>
+</html>

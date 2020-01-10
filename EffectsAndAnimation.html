@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JQuery Crash Course | Effects and Animation</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <style>
+            body {
+                font-size : 17px;
+                font-family : arial;
+                background : #f4f4f4;
+                line-height : 1.5em;
+            }
+            header {
+                background : #333;
+                color : #fff;
+                padding : 20px;
+                text-align : center;
+                border-bottom : 4px #000 solid;
+                margin-bottom: 10px;
+            }
+            #container {
+                width: 90%;
+                margin : auto;
+                padding : 10px;
+            }
+            #box{
+                background : #333;
+                color : #fff;
+                width: 500px;
+                height : 90px;
+                padding : 40px;
+                text-align: center;
+            }
+            #box2{
+                background : red;
+                width: 100px;
+                height : 100px;
+                position : relative;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>JQuery Crash Course | Effects And Animation</h1>
+        </header>
+        <div id="container">
+            <button id="btnFadeOut">Fade Out</button>
+            <button id="btnFadeIn">Fade In</button>
+            <button id="btnFadeTog">Fade Tog</button>
+            
+            <hr>
+            <button id="btnSlideUp">Slide Out</button>
+            <button id="btnSlideDown">Slide In</button>
+            <button id="btnSlideTog">Slide Tog</button>
+            <button id="btnStop">Stop</button>
+            
+            <hr>
+            <div id="box">
+                <h1>Hello World</h1>
+            </div>
+            
+            <hr>
+            <button id="btnMoveLeft">Move Left</button>
+            <button id="btnMoveRight">Move Right</button>
+            <button id="btnMoveAround">Move Around</button>
+            <div id="box2">
+            </div>
+        </div>
+        <script>
+        $(document).ready(function(){
+            //We first want to take the 'btnFadeOut' and add an event to it
+            
+            $('#btnFadeOut').click(function(){
+                $('#box').fadeOut(5000, function() {
+                //You can pass in optional parameters to vary the speed; e.g. 'fast' or [integer] for millisecs
+                //This function can also take a second parameter as a callback function that can do something when it's done
+                    $('#btnFadeOut').text("It's Gone");
+                });
+            });
+            
+            $('#btnFadeIn').click(function(){
+                $('#box').fadeIn(5000)
+            });
+            
+            //We also have 'fadeToggle()', which does BOTH
+            
+             $('#btnFadeTog').click(function(){
+                $('#box').fadeToggle(1000);
+            });          
+            
+            //We also have the slide effects
+            
+              $('#btnSlideDown').click(function(){
+                $('#box').slideDown(1000);
+            });  
+        
+              $('#btnSlideUp').click(function(){
+                $('#box').slideUp(1000);
+            }); 
+            
+              $('#btnSlideTog').click(function(){
+                $('#box').slideToggle(1000);
+            }); 
+            
+            //If we want, we can also stop it in the middle of an effect using 'stop()'
+            
+              $('#btnStop').click(function(){
+                $('#box').stop();
+            }); 
+            
+            //We will now talk about animate() functions
+            
+            //moveRight
+            
+            $('#btnMoveRight').click(function(){
+                $('#box2').animate({
+                    //This takes as an argument an object with some options
+                    left : 500,      //adds CSS property 'left : 500' - only works if position = relative
+                    //we are saying 'when we click, we want it to be 500 from the left (i.e towards the right)'
+                    height : '500px',
+                    width : '500px',
+                    opacity : '0.5'
+                });         
+            })
+            
+            //moveLeft
+            
+            $('#btnMoveLeft').click(function(){
+                $('#box2').animate({
+                    //This takes as an argument an object with some options
+                    left : 0,      //adds CSS property 'right : 500' - only works if position = relative
+                    //we are saying 'when we click, we want it to be 500 from the right (i.e towards the left)'
+                    
+                    //say we want to change the size of the box as it moves left or right
+                    //you can animate anything that takes a numeric value or a string that is numeric-like
+                    height : '100px',
+                    width : '100px',
+                    opacity : '1'
+                    
+                    
+                });         
+            })
+            
+            //We can also implement mulitple animations at once
+            
+            $('#btnMoveAround').click(function() {
+                let box = $('#box2');
+                
+                box.animate({
+                    left : 300
+                });
+                
+                box.animate({
+                    top : 300
+                });
+                
+                box.animate({
+                    top : 300,
+                    left : 0
+                });
+                
+                box.animate({
+                    top : 0,
+                    left : 0
+                });
+            });
+            
+        });
+        </script>
+    </body>
+</html>

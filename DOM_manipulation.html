@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JQuery Crash Course | DOM manipulation</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <style>
+            body {
+                font-size : 17px;
+                font-family : arial;
+                background : #f4f4f4;
+                line-height : 1.5em;
+            }
+            header {
+                background : #333;
+                color : #fff;
+                padding : 20px;
+                text-align : center;
+                border-bottom : 4px #000 solid;
+                margin-bottom: 10px;
+            }
+            #container {
+                width: 90%;
+                margin : auto;
+                padding : 10px;
+            }
+            .myClass {
+                color : blue;
+                background : black;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>JQuery Crash Course | DOM Manipulation</h1>
+        </header>
+        <div id="container">
+            <button id="btn1">Button 1</button>
+            <p class="para1">This is a paragraph</p>
+            <p class="para2">This is another paragraph</p>
+            <div id="myDiv">
+                <input type="text" id="newItem">
+                <ul id="list">
+                    <li>List Item 1</li>
+                    <li>List Item 2</li>
+                    <li>List Item 3</li>
+                    <li>List Item 4</li>
+                </ul>
+                <a href="https://www.google.com">Google</a>
+                <ul id="users">
+                    
+                </ul>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+            
+            /*
+            
+                //$('p.para1').css('color', 'red');
+                
+                //If we want to manipulate multiple CSS properties, we create an object, which is then input as an argument in the css() function
+                
+                $('p.para1').css({ color : 'red', background : '#ccc' });
+                
+                //We can also add and remove classes (go to line 26) using the 'addClass()' method
+                
+                $('p.para2').addClass('myClass');
+                
+                //Similarly, we also have 'removeClass()'
+
+                $('p.para2').removeClass('myClass');    
+                
+                //We can also toggle classes with 'toggleClass()'
+                
+                $('#btn1').click(function() {
+                    $('p.para1').toggleClass('myClass');
+                    
+                });
+                
+                //Now we will look at adding and changing content within the DOM
+                //we can assign text with the 'text()' function
+                
+                $('#myDiv').text('Hello world');
+                
+                //We can also use 'html()'
+                
+                $('#myDiv').html('<h3>Hello world</h3>');
+                
+                //We can also get and set these values
+                
+            
+                $('#myDiv').html('<h3>Hello world</h3>');
+                alert($('#myDiv').text());
+                
+                //We also have 'append()' and 'prepend()'
+                
+                $('ul').append('<li>Append List Item</li>');        //Argument is in raw HTML form
+                $('ul').prepend('<li>Prepend List Item</li>');    
+                
+                //We also have 'appendTo()' and 'prependTo()' where we can take one element and append or prepend it to another
+                
+                $('.para1').appendTo('.para2');
+                $('.para1').prependTo('.para2');
+                
+                //With append and prepend, we are taking the <li> and put it inside of the <ul>
+                //With 'before()' and 'after()', we can put stuff before and after the <ul> but nor inside it
+                
+                $('ul').before('<li>Before List Item</li'); 
+                $('ul').after('<li>After List Item</li'); 
+                
+                //Another method that we have is 'empty()', which removes all of the inner elements of the selected element (but still keeps the tags)
+                $('ul').empty();
+                
+                //We also have 'detach()', which removes the element totally (i.e. including the tags)
+                $('ul').detach();
+                
+                //We can also work with attributes (go to line 47) using the 'attr()' method
+                //This takes two arguments:
+                //Attricute name
+                //Attribute value
+                $('a').attr('target', '_blank');
+                
+                //We can also use 'attr()' to get the attribute; in this case, the 'href'
+                //This takes the attribute name as its argument
+                alert($('a').attr('href'));
+                
+                //We can also remove attributes using 'removeAttr()'
+                //This takes the attribute name as its argument
+                $('a').removeAttr('target');    //Now the link redirects to the same window (default option)
+                
+                //The nest thing is 'wrap()', which will wrap specific elements inside other elements
+                
+                //Wrap both paragraphs inside a <h1>
+                //$('p').wrap('<h1>');    //Don't need to put the ending tag, done automatically
+                
+                //We can also use 'wrapAll()', which will just use one <h1> and wrap both
+                $('p').wrapAll('<h1>');
+                
+                //Before moving onto arrays, we would like to create an input where we can add an item to our list (go to line 41)
+                
+                //We will use the 'keyup()' event
+                
+            
+            $('#newItem').keyup(function(e){
+                var code = e.which    //gets the key code
+                if(code == 13) {        //'Enter' is the code 13, for more detail see 'https://api.jquery.com/event.which/'
+                    //We prevent the default behaviour with 'preventDefault()'
+                    e.preventDefault();
+                    $('ul').append('<li>' + e.target.value +'</li>')
+                    
+                    //When the page reloads it will disappear, as it is not persisted to a database
+                }
+            });
+            
+            //ARRAYS
+            
+            var myArr = ["Brad", "Kelley", "Nate", "Jose"];
+            
+            //to loop through an array in jQuery, you can use the 'each()' method
+            //This takes two arguments
+            //1 - The array to be looped through
+            //2 - The function executed during each iteration of the loop
+            
+            //The function takes two arguments; an index and a value 
+            
+            $.each(myArr, function(i, val){
+                console.log(val);
+            });
+            
+            //We can also output them to the screen (go to line 49)
+            
+            $.each(myArr, function(i, val){
+                $('#users').append('<li>' + val +'</li>');
+            })
+                
+            //let's say we want to take some list items and put them in an array
+            //We can do this with 'toArray()' like so:
+            
+        */    
+        
+        var newArray = $('ul#list li').toArray();
+        $.each(newArray, function(i, val){
+            console.log(val.innerHTML);
+        });
+            
+        });
+        </script>
+    </body>
+</html>
